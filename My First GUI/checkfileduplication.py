@@ -2,21 +2,25 @@ import hashlib
 from tkinter import *
 from tkinter import filedialog
 
-root = tkinter.Tk()
+root = Tk()
 root.geometry("500x100")
-x = [0]
-
+x = ''
+y = ''
 def browsefunc():
+    global x
     filename = filedialog.askopenfilename()
     hash_md5 = hashlib.md5()
     with open(filename, "rb") as f:
         for chunk in iter(lambda: f.read(4096), b""):
             hash_md5.update(chunk)
-    code1 = hash_md5.digest()
+    code1 = hash_md5.digest() 
     pathlabel.config(text=code1)
-    x.append(code1)
+    x = code1
+    
+
 
 def browsefunc1():
+    global y
     filename = filedialog.askopenfilename()
     hash_md5 = hashlib.md5()
     with open(filename, "rb") as f:
@@ -24,11 +28,12 @@ def browsefunc1():
             hash_md5.update(chunk)
     code1 = hash_md5.digest()
     pathlabel1.config(text=code1)
-    x.append(code1)
-    
+    y = code1
+   
     
 def gofunc():
-    if x[1] == x[2]:
+    global x,y
+    if x == y:
         pathlabel2.config(text='Both are same')
     else:
         pathlabel2.config(text='They are different')
