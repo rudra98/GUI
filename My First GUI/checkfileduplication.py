@@ -2,21 +2,27 @@ import hashlib
 from tkinter import *
 from tkinter import filedialog
 
-root = Tk()
+root = tkinter.Tk()
 root.geometry("500x100")
 x = [0]
 
 def browsefunc():
     filename = filedialog.askopenfilename()
-    var1 = hashlib.md5(filename.encode())
-    code1 = var1.digest()
+    hash_md5 = hashlib.md5()
+    with open(filename, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    code1 = hash_md5.digest()
     pathlabel.config(text=code1)
     x.append(code1)
 
 def browsefunc1():
     filename = filedialog.askopenfilename()
-    var1 = hashlib.md5(filename.encode())
-    code1 = var1.digest()
+    hash_md5 = hashlib.md5()
+    with open(filename, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    code1 = hash_md5.digest()
     pathlabel1.config(text=code1)
     x.append(code1)
     
@@ -46,32 +52,3 @@ pathlabel2 = Label(root)
 pathlabel2.pack(side=BOTTOM)
 
 root.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''
-import tkinter as tk 
-r = tk.Tk() 
-r.title('Counting Seconds') 
-button = tk.Button(r, text='Stop', width=25, command=r.destroy) 
-button.pack() 
-r.mainloop() 
-'''
