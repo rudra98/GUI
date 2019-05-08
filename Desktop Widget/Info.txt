@@ -1,0 +1,2 @@
+The program uses tkinter to create a semi-transperent widget shaped window which will continuosly be on the desktop screen.
+It uses os library as it shows the memory usage in percent in the window.
